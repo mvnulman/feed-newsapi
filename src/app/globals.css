@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222 15% 13%;
+  --card: 0 0% 100%;
+  --card-border: 220 13% 91%;
+  --card-hover: 210 20% 98%;
+  --muted: 215 16% 57%;
+  --accent: 221 83% 53%;
+  --accent-hover: 224 76% 48%;
+}
+
+.dark {
+  --background: 224 10% 9%;
+  --foreground: 210 21% 95%;
+  --card: 220 13% 13%;
+  --card-border: 217.2 32.6% 23%;
+  --card-hover: 220 13% 17%;
+  --muted: 0 0% 63%;
+  --accent: 217 91% 70%;
+  --accent-hover: 221 83% 53%;
+}
+
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}

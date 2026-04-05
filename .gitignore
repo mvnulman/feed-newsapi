@@ -1,0 +1,23 @@
+# Dependencies
+node_modules
+
+# Next.js
+.next
+out
+dist
+next-env.d.ts
+
+# Production
+*.log
+.env*.local
+
+# Claude Code
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
