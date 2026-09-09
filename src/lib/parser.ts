@@ -1,6 +1,15 @@
 import Parser from "rss-parser";
+import type { Item } from "rss-parser";
 import { sources, getSourceBySlug } from "./sources";
 import type { Article } from "@/types";
+
+type FeedItem = Item & {
+  mediaContent?: Array<{ $: { url?: string } }>;
+  mediaThumbnail?: { $: { url?: string } };
+  contentEncoded?: string;
+  description?: string;
+  enclosure?: { link?: string };
+};
 
 const parser = new Parser({
   timeout: 8000,
@@ -17,7 +26,7 @@ const parser = new Parser({
   },
 });
 
-function extractImage(item: any): string {
+function extractImage(item: FeedItem): string {
   // Try enclosure first
   if (item.enclosure?.link) return item.enclosure.link;
   // Try media:thumbnail
@@ -51,16 +60,21 @@ export async function fetchSourceFeed(slug: string): Promise<Article[]> {
     const feed = await parser.parseURL(source.url);
     return feed.items
       .filter((item) => item.title || item.link)
-      .map((item) => ({
-        title: item.title || "Untitled",
-        link: item.link || "",
-        description: cleanDescription(item.contentSnippet || item.content || ""),
-        content: item.content || "",
-        pubDate: item.pubDate || new Date().toISOString(),
-        creator: item.creator ? [item.creator] : [],
-        image: extractImage(item),
-        source: { name: source.name, slug: source.slug },
-      }));
+      .map((item) => {
+        const feedItem = item as FeedItem;
+        return {
+          title: feedItem.title || "Untitled",
+          link: feedItem.link || "",
+          description: cleanDescription(
+            feedItem.contentSnippet || feedItem.content || ""
+          ),
+          content: feedItem.content || "",
+          pubDate: feedItem.pubDate || new Date().toISOString(),
+          creator: feedItem.creator ? [feedItem.creator] : [],
+          image: extractImage(feedItem),
+          source: { name: source.name, slug: source.slug },
+        };
+      });
   } catch (err) {
     console.error(`Error fetching ${source.name}:`, err);
     return [];

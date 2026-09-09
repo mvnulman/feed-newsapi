@@ -1,7 +1,7 @@
 "use client";
 
 import { formatDistanceToNow } from "date-fns";
-import { ExternalLink, Clock } from "lucide-react";
+import { Clock } from "lucide-react";
 import type { Article } from "@/types";
 
 interface ArticleCardProps {

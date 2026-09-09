@@ -25,7 +25,7 @@ export function SourcePage({ slug }: { slug: string }) {
   const [currentPage, setCurrentPage] = useState(1);
   const source = sources.find((s) => s.slug === slug);
 
-  const articles: Article[] = data?.articles || [];
+  const articles = useMemo<Article[]>(() => data?.articles || [], [data]);
 
   const filteredArticles = useMemo(() => {
     if (!searchQuery.trim()) return articles;

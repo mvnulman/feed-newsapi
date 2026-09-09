@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { fetchAllFeeds, fetchSourceFeed } from "@/lib/parser";
-import { revalidatePath } from "next/cache";
 
 export const revalidate = 300; // 5 minutes
 

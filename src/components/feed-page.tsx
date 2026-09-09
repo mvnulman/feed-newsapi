@@ -6,7 +6,6 @@ import { ArticleCard } from "@/components/article-card";
 import { Header } from "@/components/header";
 import { SourceFilter } from "@/components/source-filter";
 import { Pagination } from "@/components/pagination";
-import { LoadingSkeleton } from "@/components/loading-skeleton";
 import { AlertCircle, RefreshCw } from "lucide-react";
 import type { Article } from "@/types";
 
@@ -24,7 +23,7 @@ export function FeedPage() {
   const [activeSource, setActiveSource] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const articles: Article[] = data?.articles || [];
+  const articles = useMemo<Article[]>(() => data?.articles || [], [data]);
 
   const filteredArticles = useMemo(() => {
     let result = articles;
