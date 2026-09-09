@@ -17,6 +17,9 @@
   "author": "",
   "license": "ISC",
   "type": "module",
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "bugs": {
     "url": "https://github.com/mvnulman/feed-newsapi/issues"
   },
