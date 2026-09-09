@@ -107,6 +107,10 @@ Home feed (dark theme)
 
 ![Home feed (dark theme)](./src/assets/home-screenshot-2.png)
 
+Home feed (light theme)
+
+![Home feed (light theme)](./src/assets/home-screenshot-light.png)
+
 ## Features
 
 ### Server
